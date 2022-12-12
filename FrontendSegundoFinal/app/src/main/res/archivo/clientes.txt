@@ -1,5 +1,0 @@
-Pablo, 1234567-8, plp@gmail.com
-Leo, 1234567-7, leo@gmail.com
-Victor, 1234567-9, victor@gmail.com
-Fabian, 1234567-0, fabian@gmail.com
-Andres, 1234567-2, andres@gmail.com
