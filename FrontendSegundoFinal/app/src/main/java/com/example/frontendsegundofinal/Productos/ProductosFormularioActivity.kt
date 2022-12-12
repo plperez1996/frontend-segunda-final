@@ -2,6 +2,7 @@ package com.example.frontendsegundofinal.Productos
 
 import  androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -25,8 +26,6 @@ class ProductosFormularioActivity : AppCompatActivity() {
     private lateinit var  rvProductos : RecyclerView
     private lateinit var adapter : ProductosAdapter
     private val productosList = mutableListOf<ProductosEntity>()
-
-    val app = applicationContext as DatabaseApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,12 +52,16 @@ class ProductosFormularioActivity : AppCompatActivity() {
         when {
             intent.getStringExtra("flujo").toString() == "Ver" -> {
                 container.visibility = View.GONE
-                productosList.clear()
                 lifecycleScope.launch {
-                    app.room.databaseDAO().getAllProductos().forEach {
-                        productosList.add(it)
+                    val listRoom = DatabaseApp(context = applicationContext).room.databaseDAO().getAllProductos()
+                    Log.d("plp", listRoom.toString())
+                    runOnUiThread {
+                        Log.d("plp2", listRoom.toString())
+                        productosList.clear()
+                        productosList.addAll(listRoom)
+                        adapter.notifyDataSetChanged()
                     }
-                    adapter.notifyDataSetChanged()
+
 
                 }
             }

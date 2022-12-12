@@ -1,5 +1,6 @@
 package com.example.frontendsegundofinal.Productos
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -7,8 +8,12 @@ import androidx.room.PrimaryKey
 data class ProductosEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val nombre: String,
-    val codigo: String,
-    val precio: String,
-    val existencia: String
+    @ColumnInfo(name = "nombre")
+    val nombre: String? = "",
+    @ColumnInfo(name = "codigo")
+    val codigo: String? = "",
+    @ColumnInfo(name = "precio")
+    val precio: String? = "",
+    @ColumnInfo(name = "existencia")
+    val existencia: String? = ""
 )

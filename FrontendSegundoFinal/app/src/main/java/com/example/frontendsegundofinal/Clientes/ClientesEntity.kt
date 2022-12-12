@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class ClientesEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val nombre: String,
-    val ruc: String,
-    val email: String
+    val nombre: String? = "",
+    val ruc: String? = "",
+    val email: String? = ""
 )

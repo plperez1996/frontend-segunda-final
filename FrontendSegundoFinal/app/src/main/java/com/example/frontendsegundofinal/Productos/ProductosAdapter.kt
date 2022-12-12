@@ -15,10 +15,10 @@ class ProductosAdapter (val productos : List<ProductosEntity>) : RecyclerView.Ad
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val p = productos[position]
-        holder.nombre.text = p.nombre
-        holder.codigo.text = p.codigo
-        holder.precio.text = p.precio
-        holder.existencia.text = p.existencia
+        holder.nombre.text = p.nombre ?: ""
+        holder.codigo.text = p.codigo ?: ""
+        holder.precio.text = p.precio ?: ""
+        holder.existencia.text = p.existencia ?: ""
     }
 
     override fun getItemCount(): Int {
