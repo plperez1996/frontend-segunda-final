@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/toolbar"/>
+
+    <GridLayout
+        android:id="@+id/grid_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:columnCount="2"
+        android:rowCount="7"
+        tools:context=".AdministracionPacientes.CrearPersonaActivity">
+
+        <EditText
+            android:id="@+id/et_codigo"
+            android:inputType="text"
+            android:hint="Codigo"
+            android:layout_gravity="center"
+            android:layout_columnSpan="2"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            />
+
+
+        <EditText
+            android:id="@+id/et_nombre"
+            android:inputType="text"
+            android:hint="Nombre"
+            android:layout_gravity="center"
+            android:layout_columnSpan="2"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/et_precio_venta"
+            android:inputType="number"
+            android:hint="Precio de venta"
+            android:layout_gravity="fill"
+            android:layout_columnSpan="2"
+            android:layout_columnWeight="2"
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/et_existencia"
+            android:inputType="number"
+            android:hint="Existencia"
+            android:layout_gravity="fill"
+            android:layout_columnSpan="2"
+            android:layout_columnWeight="2"
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no" />
+
+        <Button
+            android:id="@+id/btn_registrar_producto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_columnSpan="2"
+            android:text="Crear Producto"/>
+
+    </GridLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

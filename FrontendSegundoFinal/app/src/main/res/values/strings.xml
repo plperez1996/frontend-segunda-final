@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Frontend Segundo Final</string>
+    <string name="fisioterapeuta">Fisioterapeuta</string>
+    <string name="paciente">Paciente</string>
+    <string name="fecha">Fecha</string>
+    <string name="observacion">Observación</string>
+    <string name="guardar">Guardar</string>
+    <string name="cancelar">cancelar</string>
+    <string name="registro_de_reservas">Registro de reservas</string>
+    <string name="filtrar_por">Filtrar por:</string>
+    <string name="empleado">Empleado</string>
+    <string name="cliente">Cliente</string>
+    <string name="fecha_desde">Fecha desde</string>
+    <string name="fecha_hasta">Fecha hasta</string>
+    <string name="buscar">buscar</string>
+    <string name="registrar_ficha">Registrar Ficha</string>
+    <string name="id_tipo_producto">ID Tipo Producto</string>
+    <string name="id_cliente">ID Cliente</string>
+    <string name="id_empleado">ID Empleado</string>
+    <string name="tratamiento">Tratamiento</string>
+    <string name="diagnostico">Diagnostico</string>
+    <string name="motivo_consulta">Motivo de la consulta</string>
+    <string name="tp_front_end">TP Front End Android Nativo</string>
+</resources>
