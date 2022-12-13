@@ -33,7 +33,7 @@ class ProductosFormularioActivity : AppCompatActivity() {
         setContentView(R.layout.activity_productos_formulario)
         val intent = intent
         var productId = 0
-
+        supportActionBar?.hide()
         etCodigo = findViewById(R.id.et_codigo)
         etNombre = findViewById(R.id.et_nombre)
         etPrecio = findViewById(R.id.et_precio_venta)

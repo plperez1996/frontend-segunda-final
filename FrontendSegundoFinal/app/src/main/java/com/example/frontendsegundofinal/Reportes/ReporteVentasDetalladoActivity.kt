@@ -1,9 +1,19 @@
 package com.example.frontendsegundofinal.Reportes
 
+import android.content.Context
 import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.widget.ImageButton
+import androidx.appcompat.widget.SearchView
+
+import android.widget.Toast
+import android.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +23,7 @@ import com.example.frontendsegundofinal.Registro.RegistroVentasEntity
 import com.example.frontendsegundofinal.Registro.ReporteDetalladoAdapter
 import com.example.frontendsegundofinal.Registro.ReportesAdapter
 import kotlinx.coroutines.launch
+import java.util.Locale.filter
 
 class ReporteVentasDetalladoActivity : AppCompatActivity() {
 
@@ -40,5 +51,41 @@ class ReporteVentasDetalladoActivity : AppCompatActivity() {
         }
 
         btnBack.setOnClickListener { finish() }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        super.onCreateOptionsMenu(menu)
+
+        menuInflater.inflate(R.menu.search_menu, menu)
+
+        val searchItem: MenuItem = menu!!.findItem(R.id.actionSearch)
+
+        val searchView: SearchView = searchItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String): Boolean {
+                filter(p0)
+                return false
+            }
+        })
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun filter(text: String){
+        val filteredlist: ArrayList<RegistroVentasEntity> = ArrayList()
+        for(item in ventasList){
+            if(item.producto.contains(text) || item.fecha.contains(text)){
+                filteredlist.add(item)
+            }
+        }
+        if(filteredlist.isEmpty()){
+            Toast.makeText(applicationContext, "No se encontraron datos", Toast.LENGTH_SHORT).show()
+        }else{
+            adapter.filterList(filteredlist)
+        }
     }
 }

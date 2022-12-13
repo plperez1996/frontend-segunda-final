@@ -29,7 +29,7 @@ class ReporteVentasResumidoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reporte_ventas_resumido)
-
+        supportActionBar?.hide()
         btnBack = findViewById(R.id.BtnBack)
         rvVentas = findViewById(R.id.rv_resumido)
         rvVentas.layoutManager = LinearLayoutManager(this)

@@ -32,7 +32,7 @@ class ClientesFormularioActivity : AppCompatActivity() {
         setContentView(R.layout.activity_clientes_formulario)
         val intent = intent
         var clientId = 0
-
+        supportActionBar?.hide()
         etNombreApellido = findViewById(R.id.et_nombre_apellido)
         etRuc = findViewById(R.id.et_ruc)
         etEmail = findViewById(R.id.et_email)

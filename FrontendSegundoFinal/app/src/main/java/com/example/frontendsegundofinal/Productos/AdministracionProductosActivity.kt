@@ -14,7 +14,7 @@ class AdministracionProductosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_administracion_productos)
-
+        supportActionBar?.hide()
         val btnCrear = findViewById<Button>(R.id.btnCreate)
         val btnVer = findViewById<Button>(R.id.btnVer)
         val btnBorrar = findViewById<Button>(R.id.btnBorrar)

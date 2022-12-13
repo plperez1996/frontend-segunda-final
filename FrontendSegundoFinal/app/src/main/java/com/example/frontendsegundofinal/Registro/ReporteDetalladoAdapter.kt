@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.frontendsegundofinal.R
 import org.w3c.dom.Text
 
-class ReporteDetalladoAdapter (val ventas : List<RegistroVentasEntity>) : RecyclerView.Adapter<ReporteDetalladoAdapter.ViewHolder>(){
+class ReporteDetalladoAdapter (var ventas : List<RegistroVentasEntity>) : RecyclerView.Adapter<ReporteDetalladoAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_ventas_detallado, parent, false)
         return ViewHolder(v)
@@ -41,5 +41,10 @@ class ReporteDetalladoAdapter (val ventas : List<RegistroVentasEntity>) : Recycl
             cantidad = v.findViewById(R.id.tvCantidad)
             producto = v.findViewById(R.id.tvProducto)
         }
+    }
+
+    fun filterList(filterlist: List<RegistroVentasEntity>){
+        ventas = filterlist
+        notifyDataSetChanged()
     }
 }
