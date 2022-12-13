@@ -7,6 +7,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.example.frontendsegundofinal.Clientes.ClientesEntity
 import com.example.frontendsegundofinal.Productos.ProductosEntity
+import com.example.frontendsegundofinal.Registro.RegistroVentasEntity
 
 @Dao
 interface DatabaseDAO {
@@ -33,4 +34,10 @@ interface DatabaseDAO {
 
     @Delete
      suspend fun deleteClientes(cliente: ClientesEntity)
+
+     @Query("SELECT * FROM RegistroVentasEntity")
+     suspend fun getAllventas(): List<RegistroVentasEntity>
+
+     @Insert
+     suspend fun insertVenta(venta: RegistroVentasEntity)
 }

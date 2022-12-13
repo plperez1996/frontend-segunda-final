@@ -6,4 +6,66 @@
     android:layout_height="match_parent"
     tools:context=".Registro.RegistroVentasActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
+    <EditText
+        android:id="@+id/et_cliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Cliente"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/et_producto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/et_cliente"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Producto"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/et_cantidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/et_producto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Cantidad"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/et_fecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/et_cantidad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"
+        android:hint="Fecha"/>
+
+    <Button
+        android:id="@+id/btn_guardar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/et_fecha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:text="Guardar"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
