@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.GridLayout
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,7 @@ class ProductosFormularioActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_productos_formulario)
         val intent = intent
+        var productId = 0
 
         etCodigo = findViewById(R.id.et_codigo)
         etNombre = findViewById(R.id.et_nombre)
@@ -54,15 +56,11 @@ class ProductosFormularioActivity : AppCompatActivity() {
                 container.visibility = View.GONE
                 lifecycleScope.launch {
                     val listRoom = DatabaseApp(context = applicationContext).room.databaseDAO().getAllProductos()
-                    Log.d("plp", listRoom.toString())
                     runOnUiThread {
-                        Log.d("plp2", listRoom.toString())
                         productosList.clear()
                         productosList.addAll(listRoom)
                         adapter.notifyDataSetChanged()
                     }
-
-
                 }
             }
             intent.getStringExtra("flujo").toString() == "Borrar" -> {
@@ -71,10 +69,42 @@ class ProductosFormularioActivity : AppCompatActivity() {
                 etExistencia.visibility = View.GONE
                 etPrecio.visibility = View.GONE
                 rvProductos.visibility = View.GONE
+                btnProducto.setOnClickListener {
+                    lifecycleScope.launch {
+                        DatabaseApp(context = applicationContext).room.databaseDAO().deleteProductos(etCodigo.text.toString())
+                        Toast.makeText(applicationContext, "Producto Borrado", Toast.LENGTH_LONG).show()
+                        finish()
+                    }
+                }
             }
             else -> {
+                lifecycleScope.launch {
+                    var total = 0
+                    DatabaseApp(context = applicationContext).room.databaseDAO().getAllProductos().also {
+                        if (it.isNotEmpty()) {
+                            total = it.last().id
+                        }
+                        runOnUiThread {
+                            productId = total + 1
+                        }
+                    }
+                }
                 btnProducto.text = "Crear Producto"
                 rvProductos.visibility = View.GONE
+                btnProducto.setOnClickListener {
+                    lifecycleScope.launch {
+                        DatabaseApp(context = applicationContext).room.databaseDAO().insertProductos(
+                            ProductosEntity(
+                                id = productId,
+                                nombre = etNombre.text.toString(),
+                                codigo = etCodigo.text.toString(),
+                                existencia = etExistencia.text.toString(),
+                                precio = etPrecio.text.toString()
+                            ))
+                        Toast.makeText(applicationContext, "Producto Creado", Toast.LENGTH_LONG).show()
+                        finish()
+                    }
+                }
             }
         }
     }

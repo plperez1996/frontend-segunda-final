@@ -7,9 +7,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.GridLayout
 import android.widget.ImageButton
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.frontendsegundofinal.DatabaseApp
+import com.example.frontendsegundofinal.Productos.ProductosEntity
 import com.example.frontendsegundofinal.R
+import kotlinx.coroutines.launch
 
 class ClientesFormularioActivity : AppCompatActivity() {
     private lateinit var btBack: ImageButton
@@ -26,6 +31,8 @@ class ClientesFormularioActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_clientes_formulario)
         val intent = intent
+        var clientId = 0
+
         etNombreApellido = findViewById(R.id.et_nombre_apellido)
         etRuc = findViewById(R.id.et_ruc)
         etEmail = findViewById(R.id.et_email)
@@ -44,16 +51,56 @@ class ClientesFormularioActivity : AppCompatActivity() {
         when {
             intent.getStringExtra("flujo").toString() == "Ver" -> {
                 container.visibility = View.GONE
+                lifecycleScope.launch {
+                    val listRoom = DatabaseApp(context = applicationContext).room.databaseDAO().getAllClientes()
+                    runOnUiThread {
+                        clientesList.clear()
+                        clientesList.addAll(listRoom)
+                        adapter.notifyDataSetChanged()
+                    }
+                }
             }
             intent.getStringExtra("flujo").toString() == "Borrar" -> {
                 btnCliente.text = "Borrar Cliente"
                 etEmail.visibility = View.GONE
                 etNombreApellido.visibility = View.GONE
                 rvClientes.visibility = View.GONE
+                btnCliente.setOnClickListener {
+                    lifecycleScope.launch {
+                        DatabaseApp(context = applicationContext).room.databaseDAO().deleteClientes(etRuc.text.toString())
+                        Toast.makeText(applicationContext, "Cliente Borrado", Toast.LENGTH_LONG).show()
+                        finish()
+                    }
+                }
             }
             else -> {
+                lifecycleScope.launch {
+                    var total = 0
+                    DatabaseApp(context = applicationContext).room.databaseDAO().getAllClientes().also {
+                        if (it.isNotEmpty()) {
+                           total = it.last().id
+                        }
+                    }
+                    runOnUiThread {
+                        clientId = total + 1
+                    }
+                }
                 btnCliente.text = "Crear Cliente"
                 rvClientes.visibility = View.GONE
+                btnCliente.setOnClickListener {
+                    lifecycleScope.launch {
+                        DatabaseApp(context = applicationContext).room.databaseDAO().insertClientes(
+                            ClientesEntity(
+                                id = clientId,
+                                nombre = etNombreApellido.text.toString(),
+                                ruc = etRuc.text.toString(),
+                                email = etEmail.text.toString()
+                            )
+                        )
+                        Toast.makeText(applicationContext, "Cliente Creado", Toast.LENGTH_LONG).show()
+                        finish()
+                    }
+                }
             }
         }
     }

@@ -20,8 +20,8 @@ interface DatabaseDAO {
     @Insert
      suspend fun insertProductos(producto: ProductosEntity)
 
-    @Delete
-     suspend fun deleteProductos(producto: ProductosEntity)
+    @Query("DELETE FROM ProductosEntity WHERE codigo = :codigo")
+     suspend fun deleteProductos(codigo: String)
 
     @Query("SELECT * FROM ClientesEntity")
      suspend fun getAllClientes(): List<ClientesEntity>
@@ -32,12 +32,12 @@ interface DatabaseDAO {
     @Insert
      suspend fun insertClientes(cliente: ClientesEntity)
 
-    @Delete
-     suspend fun deleteClientes(cliente: ClientesEntity)
-
      @Query("SELECT * FROM RegistroVentasEntity")
      suspend fun getAllventas(): List<RegistroVentasEntity>
 
      @Insert
      suspend fun insertVenta(venta: RegistroVentasEntity)
+
+    @Query("DELETE FROM ClientesEntity WHERE ruc = :ruc")
+     suspend fun deleteClientes(ruc: String)
 }
