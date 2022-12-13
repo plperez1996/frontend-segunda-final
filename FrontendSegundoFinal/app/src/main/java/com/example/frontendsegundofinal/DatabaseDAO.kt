@@ -38,6 +38,12 @@ interface DatabaseDAO {
      @Query("SELECT * FROM RegistroVentasEntity")
      suspend fun getAllventas(): List<RegistroVentasEntity>
 
+    @Query("SELECT * FROM RegistroVentasEntity WHERE cliente LIKE '%' || :cliente || '%' ")
+    suspend fun getVentasByCliente(cliente: String): List<RegistroVentasEntity>
+
+    @Query("SELECT * FROM RegistroVentasEntity WHERE fecha LIKE '%' || :fecha || '%' ")
+    suspend fun getVentasByFecha(fecha: String): List<RegistroVentasEntity>
+
      @Insert
      suspend fun insertVenta(venta: RegistroVentasEntity)
 
