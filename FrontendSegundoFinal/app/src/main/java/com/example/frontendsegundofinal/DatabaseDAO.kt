@@ -14,6 +14,9 @@ interface DatabaseDAO {
     @Query("SELECT * FROM ProductosEntity")
      suspend fun getAllProductos(): List<ProductosEntity>
 
+     @Query("SELECT * FROM ProductosEntity WHERE codigo = :codigo")
+     suspend fun getProductByCodigo(codigo: String): ProductosEntity
+
     @Update
      suspend fun updateProductos(producto: ProductosEntity)
 

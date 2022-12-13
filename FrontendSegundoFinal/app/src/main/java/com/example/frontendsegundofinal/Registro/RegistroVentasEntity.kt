@@ -17,6 +17,6 @@ data class RegistroVentasEntity (
     @ColumnInfo(name="cliente")
     val cliente: String,
     @ColumnInfo(name="total")
-    val total: Long,
+    val total: String,
     @ColumnInfo(name="producto")
     val producto: String)
