@@ -51,11 +51,18 @@ class RegistroVentasActivity : AppCompatActivity() {
 
         btnGuardar.setOnClickListener {
             lifecycleScope.launch{
-                var auxiliar = false
-                if(DatabaseApp(context = applicationContext).room.databaseDAO().getProductByCodigo(etProducto.text.toString()) == null){
+                var auxiliar = true
+                var message = ""
+
+                if (DatabaseApp(context = applicationContext).room.databaseDAO().getClienteByRuc(etCliente.text.toString()) == null){
                     auxiliar = false
-                }else{
-                    auxiliar = true
+                    message = "El cliente no existe"
+                }else if(DatabaseApp(context = applicationContext).room.databaseDAO().getProductByCodigo(etProducto.text.toString()) == null){
+                    auxiliar = false
+                    message = "El producto no existe"
+                }else if (etCantidad.text.isEmpty() || etCliente.text.isEmpty() || etFecha.text.isEmpty() || etProducto.text.isEmpty() ) {
+                    auxiliar = false
+                    message = "Hay campos vacios"
                 }
 
                 if(auxiliar){
@@ -74,7 +81,7 @@ class RegistroVentasActivity : AppCompatActivity() {
                         finish()
                     }
                 }else{
-                    Toast.makeText(applicationContext, "Producto no existe", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
                 }
             }
         }

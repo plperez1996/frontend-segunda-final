@@ -1,19 +1,12 @@
 package com.example.frontendsegundofinal.Reportes
 
-import android.content.Context
-import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.widget.SearchView
-
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,9 +14,7 @@ import com.example.frontendsegundofinal.DatabaseApp
 import com.example.frontendsegundofinal.R
 import com.example.frontendsegundofinal.Registro.RegistroVentasEntity
 import com.example.frontendsegundofinal.Registro.ReporteDetalladoAdapter
-import com.example.frontendsegundofinal.Registro.ReportesAdapter
 import kotlinx.coroutines.launch
-import java.util.Locale.filter
 
 class ReporteVentasDetalladoActivity : AppCompatActivity() {
 

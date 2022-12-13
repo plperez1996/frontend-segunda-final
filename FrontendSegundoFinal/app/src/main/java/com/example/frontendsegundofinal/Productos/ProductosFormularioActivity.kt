@@ -2,7 +2,6 @@ package com.example.frontendsegundofinal.Productos
 
 import  androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -93,16 +92,28 @@ class ProductosFormularioActivity : AppCompatActivity() {
                 rvProductos.visibility = View.GONE
                 btnProducto.setOnClickListener {
                     lifecycleScope.launch {
-                        DatabaseApp(context = applicationContext).room.databaseDAO().insertProductos(
-                            ProductosEntity(
-                                id = productId,
-                                nombre = etNombre.text.toString(),
-                                codigo = etCodigo.text.toString(),
-                                existencia = etExistencia.text.toString(),
-                                precio = etPrecio.text.toString()
-                            ))
-                        Toast.makeText(applicationContext, "Producto Creado", Toast.LENGTH_LONG).show()
-                        finish()
+                        var auxiliar = true
+                        var message = ""
+
+                        if (etCodigo.text.isEmpty() || etExistencia.text.isEmpty() || etNombre.text.isEmpty() || etPrecio.text.isEmpty() ) {
+                            auxiliar = false
+                            message = "Hay campos vacios"
+                        }
+
+                        if(auxiliar){
+                            DatabaseApp(context = applicationContext).room.databaseDAO().insertProductos(
+                                ProductosEntity(
+                                    id = productId,
+                                    nombre = etNombre.text.toString(),
+                                    codigo = etCodigo.text.toString(),
+                                    existencia = etExistencia.text.toString(),
+                                    precio = etPrecio.text.toString()
+                                ))
+                            Toast.makeText(applicationContext, "Producto Creado", Toast.LENGTH_LONG).show()
+                            finish()
+                        } else {
+                            Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }

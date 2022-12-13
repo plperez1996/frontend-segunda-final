@@ -12,7 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.frontendsegundofinal.DatabaseApp
-import com.example.frontendsegundofinal.Productos.ProductosEntity
 import com.example.frontendsegundofinal.R
 import kotlinx.coroutines.launch
 
@@ -89,16 +88,30 @@ class ClientesFormularioActivity : AppCompatActivity() {
                 rvClientes.visibility = View.GONE
                 btnCliente.setOnClickListener {
                     lifecycleScope.launch {
-                        DatabaseApp(context = applicationContext).room.databaseDAO().insertClientes(
-                            ClientesEntity(
-                                id = clientId,
-                                nombre = etNombreApellido.text.toString(),
-                                ruc = etRuc.text.toString(),
-                                email = etEmail.text.toString()
-                            )
-                        )
-                        Toast.makeText(applicationContext, "Cliente Creado", Toast.LENGTH_LONG).show()
-                        finish()
+                        var auxiliar = true
+                        var message = ""
+
+                        if (etEmail.text.isEmpty() || etRuc.text.isEmpty() || etNombreApellido.text.isEmpty()) {
+                            auxiliar = false
+                            message = "Hay campos vacios"
+                        }
+
+                        if (auxiliar) {
+                            DatabaseApp(context = applicationContext).room.databaseDAO()
+                                .insertClientes(
+                                    ClientesEntity(
+                                        id = clientId,
+                                        nombre = etNombreApellido.text.toString(),
+                                        ruc = etRuc.text.toString(),
+                                        email = etEmail.text.toString()
+                                    )
+                                )
+                            Toast.makeText(applicationContext, "Cliente Creado", Toast.LENGTH_LONG)
+                                .show()
+                            finish()
+                        } else {
+                            Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }

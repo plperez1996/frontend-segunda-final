@@ -29,6 +29,9 @@ interface DatabaseDAO {
     @Query("SELECT * FROM ClientesEntity")
      suspend fun getAllClientes(): List<ClientesEntity>
 
+    @Query("SELECT * FROM ClientesEntity WHERE ruc = :ruc")
+    suspend fun getClienteByRuc(ruc: String): ClientesEntity
+
     @Update
      suspend fun updateClientes(cliente: ClientesEntity)
 
